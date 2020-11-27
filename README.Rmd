@@ -53,8 +53,8 @@ library(Rthingsboard)
 url = "http://scada.g-eau.fr"
 publicId = "299cedc0-f3e9-11e8-9dbf-cbc1e37c11e3"
 entityId = "18d56d50-f3e9-11e8-9dbf-cbc1e37c11e3"
-startDate = as.POSIXct("2020-11-19 9:30:00")
-endDate = as.POSIXct("2020-11-19 17:00:00")
+startDate = as.POSIXct("2020-11-19 16:00:00")
+endDate = as.POSIXct("2020-11-19 18:00:00")
 
 # Set logger threshold to DEBUG to see extra messages for debug purpose
 logger::log_threshold(logger::DEBUG)
@@ -81,8 +81,8 @@ Knowing the name of the available keys, you can get the telemetry of this device
 
 Here below, we download the telemetry for all keys beginning by "Y" and display the top of the table:
 
-```{r getValues}
-df <- tb_api$getValues(entityId,
+```{r getTelemetry}
+df <- tb_api$getTelemetry(entityId,
                        keys = keys[grep("^Y", keys)],
                        startTs = startDate,
                        endTs = endDate)

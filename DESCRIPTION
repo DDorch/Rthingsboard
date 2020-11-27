@@ -16,7 +16,8 @@ LazyData: true
 Imports:
     httr,
     logger,
-    methods
+    methods,
+    dplyr
 Suggests:
     ggplot2,
     testthat

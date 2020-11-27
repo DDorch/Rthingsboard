@@ -133,6 +133,9 @@ ThingsboardApi$methods(
 #' @description
 #' See: https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values
 #'
+#' This method has a strong limitation as the thingsboard API only send the 100 last values of each key.
+#' Use the method getTelemetry to override this limitation.
+#'
 #' @name ThingsboardApi_getValues
 #' @param entityId A [character] with the entity ID given (See https://thingsboard.io/docs/user-guide/entity-views/)
 #' @param keys Vector with the list of keys from which getting the telemetry values
@@ -213,5 +216,42 @@ ThingsboardApi$methods(
                         value = numeric())
     }
     return(dfV)
+  }
+)
+
+
+#' Fetch telemetry from an entity
+#'
+#' @description
+#' See: https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values
+#'
+#' @name ThingsboardApi_getValues
+#' @param ... Parameters passed through method [getValues]
+#'
+#' @return A [data.frame] with one row per data and 3 columns:
+#'   `key`: A [character] with the key,
+#'   `ts`: A [POSIXct] with the timestamp of the data,
+#'   `value`: A [numeric] with the value of the data
+#'
+#' @import dplyr
+#'
+NULL
+ThingsboardApi$methods(
+  getTelemetry = function(..., endTs) {
+    the_end <- FALSE
+    df <- NULL
+    while(!the_end) {
+      dfI <- getValues(..., endTs = endTs)
+      the_end <- nrow(dfI) == 0
+      if(is.null(df)) {
+        df <- dfI
+      } else {
+        df <- rbind(df, dfI)
+      }
+      df_minTs <- df %>% arrange(ts) %>% group_by(key) %>% slice(1)
+      endTs <- max(df_minTs$ts)
+    }
+    df <- unique(df)
+    return(df)
   }
 )

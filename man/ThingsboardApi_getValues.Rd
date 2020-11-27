@@ -9,14 +9,26 @@
 \item{keys}{Vector with the list of keys from which getting the telemetry values}
 
 \item{entityType}{A [character] (default "DEVICE")}
+
+\item{...}{Parameters passed through method [getValues]}
 }
 \value{
 A [data.frame] with one row per data and 3 columns:
   `key`: A [character] with the key,
   `ts`: A [POSIXct] with the timestamp of the data,
   `value`: A [numeric] with the value of the data
+
+A [data.frame] with one row per data and 3 columns:
+  `key`: A [character] with the key,
+  `ts`: A [POSIXct] with the timestamp of the data,
+  `value`: A [numeric] with the value of the data
 }
 \description{
+See: https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values
+
+This method has a strong limitation as the thingsboard API only send the 100 last values of each key.
+Use the method getTelemetry to override this limitation.
+
 See: https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values
 }
 \details{
