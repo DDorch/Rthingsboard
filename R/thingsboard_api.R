@@ -66,6 +66,11 @@ ThingsboardApi$methods(
       body = list(publicId = publicId),
       encode = "json"
     )
+    if (httr::http_error(res) || httr::http_status(res)$reason != "OK") {
+      stop("Request failed with status ",
+           httr::http_status(res)$message)
+    }
+
     dToken = httr::content(res, as = "parsed", encoding = "Latin1")
     token <<- dToken$token
     logger::log_debug("ThingsboardApi$getToken: ", substr(token, 1, 12), "...")
@@ -109,6 +114,12 @@ ThingsboardApi$methods(
       httr::content_type_json(),
       httr::add_headers(`X-Authorization` = paste("Bearer", token))
     )
+
+    if (httr::http_error(res) || httr::http_status(res)$reason != "OK") {
+      stop("Request failed with status ",
+           httr::http_status(res)$message)
+    }
+
     keys <-
       unlist(httr::content(res, as = "parsed", encoding = "Latin1"))
     logger::log_debug(paste("keys =", paste(keys, collapse = ", ")))
@@ -178,7 +189,7 @@ ThingsboardApi$methods(
       httr::add_headers(`X-Authorization` = paste("Bearer", token))
     )
 
-    if (httr::http_error(res)) {
+    if (httr::http_error(res) || httr::http_status(res)$reason != "OK") {
       stop("Request failed with status ",
            httr::http_status(res)$message)
     }
@@ -192,9 +203,15 @@ ThingsboardApi$methods(
                      c("key", "ts", "value")
                    df
                  })
-    dfV <- do.call(rbind, lV)
-    dfV$ts <- EpochMilli2Date(dfV$ts)
-    dfV$value <- as.numeric(dfV$value)
+    if(length(lV) > 0) {
+      dfV <- do.call(rbind, lV)
+      dfV$ts <- EpochMilli2Date(dfV$ts)
+      dfV$value <- as.numeric(dfV$value)
+    } else {
+      dfV <- data.frame(key = character(),
+                        ts = as.POSIXct(character()),
+                        value = numeric())
+    }
     return(dfV)
   }
 )
