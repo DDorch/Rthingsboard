@@ -1,7 +1,7 @@
 Package: Rthingsboard
 Type: Package
-Title: R package for interacting with ThingsBoard API
-Version: 0.1.1
+Title: R package for Interacting with ThingsBoard API
+Version: 0.2.0
 Date: 2020-11-27
 Authors@R:
     person(given = "David",

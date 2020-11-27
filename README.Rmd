@@ -53,8 +53,8 @@ library(Rthingsboard)
 url = "http://scada.g-eau.fr"
 publicId = "299cedc0-f3e9-11e8-9dbf-cbc1e37c11e3"
 entityId = "18d56d50-f3e9-11e8-9dbf-cbc1e37c11e3"
-startDate = as.POSIXct("2020-11-19 16:00:00")
-endDate = as.POSIXct("2020-11-19 18:00:00")
+startDate = as.POSIXct("2020-11-19 15:00:00", tz = "Europe/Paris")
+endDate = as.POSIXct("2020-11-19 18:00:00", tz = "Europe/Paris")
 
 # Set logger threshold to DEBUG to see extra messages for debug purpose
 logger::log_threshold(logger::DEBUG)
@@ -86,6 +86,12 @@ df <- tb_api$getTelemetry(entityId,
                        keys = keys[grep("^Y", keys)],
                        startTs = startDate,
                        endTs = endDate)
+```
+
+ThingsBoard returns date in GMT, it can be convenient to change it to a local time zone:
+
+```{r time zone}
+attributes(df$ts)$tzone <- "Europe/Paris"
 knitr::kable(head(df))
 ```
 You can then record this table into a file in the current directory:
