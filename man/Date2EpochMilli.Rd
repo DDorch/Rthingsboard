@@ -13,10 +13,10 @@ Date2EpochMilli(ts)
 \method{Date2EpochMilli}{numeric}(ts)
 }
 \arguments{
-\item{ts}{a [numeric] representing an epoch in seconds or a [POSIXt] date}
+\item{ts}{a \link{numeric} representing an epoch in seconds or a \link{POSIXt} date}
 }
 \value{
-a [character] of the epoch in milliseconds
+a \link{character} of the epoch in milliseconds
 }
 \description{
 This function allows to convert epoch timestamp in seconds to an epoch in milliseconds

@@ -4,21 +4,16 @@
 \alias{ThingsboardApi_getKeys}
 \title{Fetch data keys for an entity}
 \arguments{
-\item{entityId}{[character] entity ID}
+\item{entityId}{\link{character} entity ID}
 
-\item{entityType}{[character] (default "DEVICE")}
+\item{entityType}{\link{character} (default "DEVICE")}
 }
 \value{
-A vector of [character] with the keys available for the requested device.
+A vector of \link{character} with the keys available for the requested device.
 }
 \description{
 Fetch data keys for an entity
 }
 \details{
-The description of this operation in API documentation is here: https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-keys
-
-This function is equivalent to:
-curl -v -X GET http://localhost:8080/api/plugins/telemetry/DEVICE/ac8e6020-ae99-11e6-b9bd-2b15845ada4e/keys/timeseries \
---header "Content-Type:application/json" \
---header "X-Authorization: $JWT_TOKEN"
+The description of this operation in API documentation is here: \url{https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-keys}
 }

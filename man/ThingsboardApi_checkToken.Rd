@@ -4,7 +4,7 @@
 \alias{ThingsboardApi_checkToken}
 \title{Check if the token is timeouted and refresh it if necessary}
 \value{
-[NULL]
+\link{NULL}
 }
 \description{
 Check if the token is timeouted and refresh it if necessary

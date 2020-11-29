@@ -4,15 +4,11 @@
 \alias{ThingsboardApi_getToken}
 \title{Get authorisation token from thingsboard server for a specific device}
 \arguments{
-\item{timeOut}{[numeric] number of second before token timeout (default field `tokenTimeOut`)}
+\item{timeOut}{\link{numeric} number of second before token timeout (default field \code{tokenTimeOut})}
 }
 \value{
-list with keys 'token' and 'refreshtoken'
+A \link{list} with keys 'token' and 'refreshtoken'
 }
 \description{
 Get authorisation token from thingsboard server for a specific device
-}
-\details{
-getToken(url, publicId) is equivalent to:
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"publicId":[publicId]}' '[url]'
 }

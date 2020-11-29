@@ -4,37 +4,25 @@
 \alias{ThingsboardApi_getValues}
 \title{Fetch values from an entity}
 \arguments{
-\item{entityId}{A [character] with the entity ID given (See https://thingsboard.io/docs/user-guide/entity-views/)}
+\item{entityId}{A \link{character} with the entity ID given (See \url{https://thingsboard.io/docs/user-guide/entity-views/})}
 
-\item{keys}{Vector with the list of keys from which getting the telemetry values}
+\item{keys}{Vector of \link{character} with the list of keys from which getting the telemetry values}
 
-\item{entityType}{A [character] (default "DEVICE")}
+\item{entityType}{A \link{character} (default "DEVICE")}
 
-\item{...}{Parameters passed through method [getValues]}
+\item{startTs}{A \link{numeric} or a \link{POSIXct} representing respectively the epoch or the date of the start of data extraction period}
+
+\item{endTs}{A \link{numeric} or a \link{POSIXct} representing respectively the epoch or the date of the end of data extraction period}
 }
 \value{
-A [data.frame] with one row per data and 3 columns:
-  `key`: A [character] with the key,
-  `ts`: A [POSIXct] with the timestamp of the data,
-  `value`: A [numeric] with the value of the data
-
-A [data.frame] with one row per data and 3 columns:
-  `key`: A [character] with the key,
-  `ts`: A [POSIXct] with the timestamp of the data,
-  `value`: A [numeric] with the value of the data
+A \link{data.frame} with one row per data and 3 columns:
+\code{key}: A \link{character} with the key,
+\code{ts}: A \link{POSIXct} with the timestamp of the data,
+\code{value}: A \link{numeric} with the value of the data
 }
 \description{
-See: https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values
+See: \url{https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values}
 
 This method has a strong limitation as the thingsboard API only send the 100 last values of each key.
 Use the method getTelemetry to override this limitation.
-
-See: https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values
-}
-\details{
-Equivalent to:
-
-`curl -v -X GET http://localhost:8080/api/plugins/telemetry/DEVICE/ac8e6020-ae99-11e6-b9bd-2b15845ada4e/keys/timeseries \
---header "Content-Type:application/json" \
---header "X-Authorization: $JWT_TOKEN"`
 }

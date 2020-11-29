@@ -7,10 +7,10 @@
 EpochMilli2Date(x)
 }
 \arguments{
-\item{x}{A [character] or a [numeric] representing an epoch in milliseconds}
+\item{x}{A \link{character} or a \link{numeric} representing an epoch in milliseconds}
 }
 \value{
-A [POSIXct], the date corresponding to the epoch
+A \link{POSIXct}, the date corresponding to the epoch
 }
 \description{
 Convert an epoch in milliseconds into a date

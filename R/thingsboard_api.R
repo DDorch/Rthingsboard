@@ -1,6 +1,6 @@
 #' @title Thingboard API Class
 #'
-#' @field url URL of the thingsboard IoT platform.
+#' @field url [character] URL of the thingsboard IoT platform.
 #' @field publicId [character] the public ID of the device
 #' @field token [character] the current token
 #' @field tokenTimeOut A [numeric] contains the time out of a token in seconds (default 300)
@@ -33,6 +33,7 @@ ThingsboardApi <- setRefClass(
   )
 )
 
+
 #' Check if the token is timeouted and refresh it if necessary
 #'
 #' @name ThingsboardApi_checkToken
@@ -53,11 +54,8 @@ ThingsboardApi$methods(
 #' @name ThingsboardApi_getToken
 #' @param timeOut [numeric] number of second before token timeout (default field `tokenTimeOut`)
 #'
-#' @return list with keys 'token' and 'refreshtoken'
+#' @return A [list] with keys 'token' and 'refreshtoken'
 #'
-#' @details
-#' getToken(url, publicId) is equivalent to:
-#' curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"publicId":[publicId]}' '[url]'
 NULL
 ThingsboardApi$methods(
   getToken = function (timeOut = tokenTimeOut) {
@@ -87,12 +85,7 @@ ThingsboardApi$methods(
 #'
 #' @name ThingsboardApi_getKeys
 #' @details
-#' The description of this operation in API documentation is here: https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-keys
-#'
-#' This function is equivalent to:
-#' curl -v -X GET http://localhost:8080/api/plugins/telemetry/DEVICE/ac8e6020-ae99-11e6-b9bd-2b15845ada4e/keys/timeseries \
-#' --header "Content-Type:application/json" \
-#' --header "X-Authorization: $JWT_TOKEN"
+#' The description of this operation in API documentation is here: <https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-keys>
 #'
 #' @param entityId [character] entity ID
 #' @param entityType [character] (default "DEVICE")
@@ -131,27 +124,24 @@ ThingsboardApi$methods(
 #' Fetch values from an entity
 #'
 #' @description
-#' See: https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values
+#' See: <https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values>
 #'
-#' This method has a strong limitation as the thingsboard API only send the 100 last values of each key.
+#' This method has a strong limitation as the thingsboard API only send the
+#' 100 last values of each key.
 #' Use the method getTelemetry to override this limitation.
 #'
 #' @name ThingsboardApi_getValues
-#' @param entityId A [character] with the entity ID given (See https://thingsboard.io/docs/user-guide/entity-views/)
-#' @param keys Vector with the list of keys from which getting the telemetry values
+#' @param entityId A [character] with the entity ID given (See <https://thingsboard.io/docs/user-guide/entity-views/>)
+#' @param keys Vector of [character] with the list of keys from which getting the telemetry values
 #' @param entityType A [character] (default "DEVICE")
+#' @param startTs A [numeric] or a [POSIXct] representing respectively the epoch or the date of the start of data extraction period
+#' @param endTs A [numeric] or a [POSIXct] representing respectively the epoch or the date of the end of data extraction period
 #'
 #' @return A [data.frame] with one row per data and 3 columns:
 #'   `key`: A [character] with the key,
 #'   `ts`: A [POSIXct] with the timestamp of the data,
 #'   `value`: A [numeric] with the value of the data
 #'
-#' @details
-#' Equivalent to:
-#'
-#' `curl -v -X GET http://localhost:8080/api/plugins/telemetry/DEVICE/ac8e6020-ae99-11e6-b9bd-2b15845ada4e/keys/timeseries \
-#' --header "Content-Type:application/json" \
-#' --header "X-Authorization: $JWT_TOKEN"`
 #'
 NULL
 ThingsboardApi$methods(
@@ -220,18 +210,23 @@ ThingsboardApi$methods(
 )
 
 
-#' Fetch telemetry from an entity
+#' Fetch telemetry
 #'
 #' @description
-#' See: https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values
 #'
-#' @name ThingsboardApi_getValues
-#' @param ... Parameters passed through method [getValues]
+#' Fetch telemetry data for an entity. See [ThingsboardApi_getValues] for the arguments.
+#'
+#' See: <https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values>
+#'
+#' @name ThingsboardApi_getTelemetry
+#' @param ... Parameters passed through method [ThingsboardApi_getValues]
+#' @param endTs A [numeric] or a [POSIXct] representing respectively the epoch or the date of the end of data extraction period
 #'
 #' @return A [data.frame] with one row per data and 3 columns:
-#'   `key`: A [character] with the key,
-#'   `ts`: A [POSIXct] with the timestamp of the data,
-#'   `value`: A [numeric] with the value of the data
+#'
+#'  * `key`: a [character] with the key
+#'  * `ts`: a [POSIXct] with the timestamp of the data
+#'  * `value`: a [numeric] with the value of the data
 #'
 #' @import dplyr
 #'

@@ -11,15 +11,15 @@ Thingboard API Class
 \section{Fields}{
 
 \describe{
-\item{\code{url}}{URL of the thingsboard IoT platform.}
+\item{\code{url}}{\link{character} URL of the thingsboard IoT platform.}
 
-\item{\code{publicId}}{[character] the public ID of the device}
+\item{\code{publicId}}{\link{character} the public ID of the device}
 
-\item{\code{token}}{[character] the current token}
+\item{\code{token}}{\link{character} the current token}
 
-\item{\code{tokenTimeOut}}{A [numeric] contains the time out of a token in seconds (default 300)}
+\item{\code{tokenTimeOut}}{A \link{numeric} contains the time out of a token in seconds (default 300)}
 
-\item{\code{tokenEpiration}}{A [numeric] with the Epoch of the expiration date time of current token}
+\item{\code{tokenEpiration}}{A \link{numeric} with the Epoch of the expiration date time of current token}
 }}
 
 

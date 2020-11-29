@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # Rthingsboard
 
 <!-- badges: start -->
+[![R build status](https://github.com/DDorch/Rthingsboard/workflows/R-CMD-check/badge.svg)](https://github.com/DDorch/Rthingsboard/actions)
 <!-- badges: end -->
 
 The goal of Rthingsboard is to provide interaction with the API of Thingsboard (https://thingsboard.io/), an open-source IoT platform for device management, data collection, processing and visualization. 
