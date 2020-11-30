@@ -5,6 +5,12 @@
 
 <!-- badges: start -->
 
+[![](https://img.shields.io/badge/devel%20version-0.2.0-blue.svg)](https://github.com/DDorch/Rthingsboard)
+[![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![R build
+status](https://github.com/DDorch/Rthingsboard/workflows/R-CMD-check/badge.svg)](https://github.com/DDorch/Rthingsboard/actions)
+[![License:
+AGPL-3](https://img.shields.io/badge/license-AGPL--3-orange.svg)](https://cran.r-project.org/web/licenses/AGPL-3)
 <!-- badges: end -->
 
 The goal of Rthingsboard is to provide interaction with the API of
@@ -60,8 +66,8 @@ First, you need to create an object of class `ThingsboardApi` as follow:
 ``` r
 # Connection to the API
 tb_api = ThingsboardApi(url = url, publicId = publicId)
-#> DEBUG [2020-11-27 19:23:38] ThingsboardApi$getToken: eyJhbGciOiJI...
-#> DEBUG [2020-11-27 19:23:38] ThingsboardApi$getToken: expiration 2020-11-27 19:28:38
+#> DEBUG [2020-11-30 11:50:25] ThingsboardApi$getToken: eyJhbGciOiJI...
+#> DEBUG [2020-11-30 11:50:25] ThingsboardApi$getToken: expiration 2020-11-30 11:55:25
 ```
 
 ### Retrieve data from the Thingsboard server
@@ -72,50 +78,47 @@ You can get the available keys on the specified device defined by its
 ``` r
 # Get list of keys
 keys = tb_api$getKeys(entityId = entityId)
-#> DEBUG [2020-11-27 19:23:38] keys = A0, A1, A10, A2, A3, A4, A5, A6, A7, A8, A9, B0, B1, C1, C3, N0, Q0, Q1, Q2, Q3, Y0, Y1, Y10, Y2, Y3, Y4, Y5, Y6, Y7, Y8, Y9
+#> DEBUG [2020-11-30 11:50:26] keys = A0, A1, A10, A2, A3, A4, A5, A6, A7, A8, A9, B0, B1, C1, C3, N0, Q0, Q1, Q2, Q3, Y0, Y1, Y10, Y2, Y3, Y4, Y5, Y6, Y7, Y8, Y9
 ```
 
 Knowing the name of the available keys, you can get the telemetry of
 this device for a given period defined by `startTS` and `endTS`.
 
-Here below, we download the telemetry for all keys beginning by “Y” and
-display the top of the table:
+Here below, we download the telemetry for all keys beginning by “Y”:
 
 ``` r
 df <- tb_api$getTelemetry(entityId,
                        keys = keys[grep("^Y", keys)],
                        startTs = startDate,
                        endTs = endDate)
-#> DEBUG [2020-11-27 19:23:38] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605805200000&agg=NONE
-#> DEBUG [2020-11-27 19:23:38] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605804700000&agg=NONE
-#> DEBUG [2020-11-27 19:23:38] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605804199000&agg=NONE
-#> DEBUG [2020-11-27 19:23:38] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605803699000&agg=NONE
-#> DEBUG [2020-11-27 19:23:38] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605803198000&agg=NONE
-#> DEBUG [2020-11-27 19:23:38] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605802698000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605802197000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605801697000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605801196000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605800696000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605800195000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605799695000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605799194000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605798694000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605798193000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605797693000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605797192000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605796692000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605796191000&agg=NONE
-#> DEBUG [2020-11-27 19:23:39] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605795691000&agg=NONE
-#> DEBUG [2020-11-27 19:23:40] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605795190000&agg=NONE
-#> DEBUG [2020-11-27 19:23:40] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605794690000&agg=NONE
-#> DEBUG [2020-11-27 19:23:40] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605794400000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605805200000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605804700000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605804199000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605803699000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605803198000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605802698000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605802197000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605801697000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605801196000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605800696000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605800195000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605799695000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605799194000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605798694000&agg=NONE
+#> DEBUG [2020-11-30 11:50:26] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605798193000&agg=NONE
+#> DEBUG [2020-11-30 11:50:27] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605797693000&agg=NONE
+#> DEBUG [2020-11-30 11:50:27] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605797192000&agg=NONE
+#> DEBUG [2020-11-30 11:50:27] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605796692000&agg=NONE
+#> DEBUG [2020-11-30 11:50:27] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605796191000&agg=NONE
+#> DEBUG [2020-11-30 11:50:27] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605795691000&agg=NONE
+#> DEBUG [2020-11-30 11:50:27] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605795190000&agg=NONE
+#> DEBUG [2020-11-30 11:50:27] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605794690000&agg=NONE
+#> DEBUG [2020-11-30 11:50:27] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605794400000&agg=NONE
 ```
 
-ThingsBoard returns date in GMT, it can be convenient to change it to a
-local time zone:
+Here below the first records of the extracted telemetry:
 
 ``` r
-attributes(df$ts)$tzone <- "Europe/Paris"
 knitr::kable(head(df))
 ```
 
@@ -139,7 +142,7 @@ And also plot some time series:
 
 ``` r
 library(ggplot2)
-ggplot(df, aes(x = ts, y = value)) + 
+ggplot(df, aes(x = ts, y = value)) +
   geom_line(aes(color = key), size = 1) +
   scale_color_brewer(palette = "Set1")
 ```

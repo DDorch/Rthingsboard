@@ -4,10 +4,12 @@
 \alias{EpochMilli2Date}
 \title{Convert an epoch in milliseconds into a date}
 \usage{
-EpochMilli2Date(x)
+EpochMilli2Date(x, timezone = "GMT")
 }
 \arguments{
 \item{x}{A \link{character} or a \link{numeric} representing an epoch in milliseconds}
+
+\item{timezone}{A \link{character} with the time zone used for the conversion}
 }
 \value{
 A \link{POSIXct}, the date corresponding to the epoch

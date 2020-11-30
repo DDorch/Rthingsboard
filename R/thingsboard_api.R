@@ -198,7 +198,7 @@ ThingsboardApi$methods(
                  })
     if(length(lV) > 0) {
       dfV <- do.call(rbind, lV)
-      dfV$ts <- EpochMilli2Date(dfV$ts)
+      dfV$ts <- EpochMilli2Date(dfV$ts, timezone = attributes(startTs)$tzone)
       dfV$value <- as.numeric(dfV$value)
     } else {
       dfV <- data.frame(key = character(),

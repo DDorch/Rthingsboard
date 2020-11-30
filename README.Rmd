@@ -13,13 +13,20 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r echo=FALSE, results="hide", message=FALSE}
+library("badger")
+```
+
 # Rthingsboard
 
 <!-- badges: start -->
+`r badge_devel(color = "blue")`
+`r badge_lifecycle("maturing", color = "blue")`
 [![R build status](https://github.com/DDorch/Rthingsboard/workflows/R-CMD-check/badge.svg)](https://github.com/DDorch/Rthingsboard/actions)
+`r badge_license(color = "orange")`
 <!-- badges: end -->
 
-The goal of Rthingsboard is to provide interaction with the API of Thingsboard (https://thingsboard.io/), an open-source IoT platform for device management, data collection, processing and visualization. 
+The goal of Rthingsboard is to provide interaction with the API of Thingsboard (https://thingsboard.io/), an open-source IoT platform for device management, data collection, processing and visualization.
 
 
 
@@ -80,7 +87,7 @@ keys = tb_api$getKeys(entityId = entityId)
 
 Knowing the name of the available keys, you can get the telemetry of this device for a given period defined by `startTS` and `endTS`.
 
-Here below, we download the telemetry for all keys beginning by "Y" and display the top of the table:
+Here below, we download the telemetry for all keys beginning by "Y":
 
 ```{r getTelemetry}
 df <- tb_api$getTelemetry(entityId,
@@ -89,12 +96,12 @@ df <- tb_api$getTelemetry(entityId,
                        endTs = endDate)
 ```
 
-ThingsBoard returns date in GMT, it can be convenient to change it to a local time zone:
+Here below the first records of the extracted telemetry:
 
 ```{r time zone}
-attributes(df$ts)$tzone <- "Europe/Paris"
 knitr::kable(head(df))
 ```
+
 You can then record this table into a file in the current directory:
 
 ```{r write_csv, eval=FALSE}
@@ -106,7 +113,7 @@ And also plot some time series:
 
 ```{r plot_telemetry}
 library(ggplot2)
-ggplot(df, aes(x = ts, y = value)) + 
+ggplot(df, aes(x = ts, y = value)) +
   geom_line(aes(color = key), size = 1) +
   scale_color_brewer(palette = "Set1")
 ```

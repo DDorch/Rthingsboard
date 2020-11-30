@@ -23,6 +23,7 @@ A \link{data.frame} with one row per data and 3 columns:
 \description{
 See: \url{https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values}
 
-This method has a strong limitation as the thingsboard API only send the 100 last values of each key.
+This method has a strong limitation as the thingsboard API only send the
+100 last values of each key.
 Use the method getTelemetry to override this limitation.
 }

@@ -3,4 +3,5 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^.*\.csv$
+^.*\.pdf$
 ^\.github$
