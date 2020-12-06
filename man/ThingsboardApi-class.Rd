@@ -11,7 +11,7 @@ Thingboard API Class
 \section{Fields}{
 
 \describe{
-\item{\code{url}}{\link{character} URL of the thingsboard IoT platform.}
+\item{\code{url}}{\link{character} URL of the 'ThingsBoard' IoT platform.}
 
 \item{\code{publicId}}{\link{character} the public ID of the device}
 
