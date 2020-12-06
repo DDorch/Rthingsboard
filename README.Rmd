@@ -26,13 +26,13 @@ library("badger")
 `r badge_license(color = "orange")`
 <!-- badges: end -->
 
-The goal of Rthingsboard is to provide interaction with the API of Thingsboard (https://thingsboard.io/), an open-source IoT platform for device management, data collection, processing and visualization.
+The goal of 'Rthingsboard' is to provide interaction with the API of 'ThingsBoard' (https://thingsboard.io/), an open-source IoT platform for device management, data collection, processing and visualization.
 
 
 
 ## Installation
 
-You can install the released version of Rthingsboard from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of 'Rthingsboard' from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("Rthingsboard")
@@ -68,7 +68,7 @@ endDate = as.POSIXct("2020-11-19 18:00:00", tz = "Europe/Paris")
 logger::log_threshold(logger::DEBUG)
 ```
 
-### Connexion to the Thingsboard server
+### Connexion to the 'ThingsBoard' server
 
 First, you need to create an object of class `ThingsboardApi` as follow:
 
@@ -76,7 +76,7 @@ First, you need to create an object of class `ThingsboardApi` as follow:
 # Connection to the API
 tb_api = ThingsboardApi(url = url, publicId = publicId)
 ```
-### Retrieve data from the Thingsboard server
+### Retrieve data from the 'ThingsBoard' server
 
 You can get the available keys on the specified device defined by its `entityId`:
 

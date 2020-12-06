@@ -1,6 +1,6 @@
 #' @title Thingboard API Class
 #'
-#' @field url [character] URL of the thingsboard IoT platform.
+#' @field url [character] URL of the 'ThingsBoard' IoT platform.
 #' @field publicId [character] the public ID of the device
 #' @field token [character] the current token
 #' @field tokenTimeOut A [numeric] contains the time out of a token in seconds (default 300)
@@ -70,9 +70,9 @@ ThingsboardApi$methods(
     }
 
     dToken = httr::content(res, as = "parsed", encoding = "Latin1")
-    token <<- dToken$token
+    .self$token <- dToken$token
     logger::log_debug("ThingsboardApi$getToken: ", substr(token, 1, 12), "...")
-    tokenExpiration <<- as.numeric(Sys.time()) + timeOut
+    .self$tokenExpiration <- as.numeric(Sys.time()) + timeOut
     logger::log_debug("ThingsboardApi$getToken: expiration ",
                       as.character(as.POSIXct(tokenExpiration, origin =
                                                 "1970-01-01")))
@@ -126,7 +126,7 @@ ThingsboardApi$methods(
 #' @description
 #' See: <https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values>
 #'
-#' This method has a strong limitation as the thingsboard API only send the
+#' This method has a strong limitation as the 'ThingsBoard' API only send the
 #' 100 last values of each key.
 #' Use the method getTelemetry to override this limitation.
 #'
