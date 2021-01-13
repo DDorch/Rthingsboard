@@ -1,8 +1,8 @@
 Package: Rthingsboard
 Type: Package
-Title: R Package for Interacting with 'ThingsBoard' API
-Version: 0.2.1
-Date: 2020-12-06
+Title: 'ThingsBoard' API
+Version: 0.2.2
+Date: 2021-01-13
 Authors@R:
     person(given = "David",
            family = "Dorchies",
