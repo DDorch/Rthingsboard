@@ -33,7 +33,7 @@ The goal of 'Rthingsboard' is to provide interaction with the API of 'ThingsBoar
 
 ## Installation
 
-You can install the released version of 'Rthingsboard' from [CRAN](https://cran.r-project.org/web/packages/Rthingsboard/) with:
+You can install the released version of 'Rthingsboard' from [CRAN](https://CRAN.R-project.org/package=Rthingsboard) with:
 
 ``` r
 install.packages("Rthingsboard")

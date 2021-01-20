@@ -21,7 +21,7 @@ for device management, data collection, processing and visualization.
 ## Installation
 
 You can install the released version of ‘Rthingsboard’ from
-[CRAN](https://cran.r-project.org/web/packages/Rthingsboard/) with:
+[CRAN](https://CRAN.R-project.org/package=Rthingsboard) with:
 
 ``` r
 install.packages("Rthingsboard")
