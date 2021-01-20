@@ -20,10 +20,11 @@ library("badger")
 # Rthingsboard
 
 <!-- badges: start -->
-`r badge_devel(color = "blue")`
-`r badge_lifecycle("maturing", color = "blue")`
-[![R build status](https://github.com/DDorch/Rthingsboard/workflows/R-CMD-check/badge.svg)](https://github.com/DDorch/Rthingsboard/actions)
 `r badge_license(color = "orange")`
+`r badge_lifecycle("maturing", color = "blue")`
+`r badge_devel(color = "blue")`
+[![R build status](https://github.com/DDorch/Rthingsboard/workflows/R-CMD-check/badge.svg)](https://github.com/DDorch/Rthingsboard/actions)
+`r badge_code_size("DDorch/Rthingsboard")`
 <!-- badges: end -->
 
 The goal of 'Rthingsboard' is to provide interaction with the API of 'ThingsBoard' (https://thingsboard.io/), an open-source IoT platform for device management, data collection, processing and visualization.
@@ -32,7 +33,7 @@ The goal of 'Rthingsboard' is to provide interaction with the API of 'ThingsBoar
 
 ## Installation
 
-You can install the released version of 'Rthingsboard' from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of 'Rthingsboard' from [CRAN](https://cran.r-project.org/web/packages/Rthingsboard/) with:
 
 ``` r
 install.packages("Rthingsboard")

@@ -24,7 +24,16 @@ Thingboard API Class
 
 
 \examples{
-thinksboard_api = ThingsboardApi(url="http://scada.g-eau.net",
-                                 publicId="299cedc0-f3e9-11e8-9dbf-cbc1e37c11e3")
-
+\donttest{
+thinksboard_api = tryCatch(
+  {
+    ThingsboardApi(url="http://scada.g-eau.fr",
+                   publicId="299cedc0-f3e9-11e8-9dbf-cbc1e37c11e3")
+  },
+  error = function(e) {
+    message("An error occured:\n", e)
+    return(FALSE)
+  }
+)
+}
 }

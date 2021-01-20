@@ -5,12 +5,13 @@
 
 <!-- badges: start -->
 
-[![](https://img.shields.io/badge/devel%20version-0.2.0-blue.svg)](https://github.com/DDorch/Rthingsboard)
-[![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![R build
-status](https://github.com/DDorch/Rthingsboard/workflows/R-CMD-check/badge.svg)](https://github.com/DDorch/Rthingsboard/actions)
 [![License:
 AGPL-3](https://img.shields.io/badge/license-AGPL--3-orange.svg)](https://cran.r-project.org/web/licenses/AGPL-3)
+[![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![](https://img.shields.io/badge/devel%20version-0.2.3-blue.svg)](https://github.com/DDorch/Rthingsboard)
+[![R build
+status](https://github.com/DDorch/Rthingsboard/workflows/R-CMD-check/badge.svg)](https://github.com/DDorch/Rthingsboard/actions)
+[![](https://img.shields.io/github/languages/code-size/DDorch/Rthingsboard.svg)](https://github.com/DDorch/Rthingsboard)
 <!-- badges: end -->
 
 The goal of ‘Rthingsboard’ is to provide interaction with the API of
@@ -20,7 +21,7 @@ for device management, data collection, processing and visualization.
 ## Installation
 
 You can install the released version of ‘Rthingsboard’ from
-[CRAN](https://CRAN.R-project.org) with:
+[CRAN](https://cran.r-project.org/web/packages/Rthingsboard/) with:
 
 ``` r
 install.packages("Rthingsboard")
@@ -66,8 +67,8 @@ First, you need to create an object of class `ThingsboardApi` as follow:
 ``` r
 # Connection to the API
 tb_api = ThingsboardApi(url = url, publicId = publicId)
-#> DEBUG [2020-12-06 15:54:02] ThingsboardApi$getToken: eyJhbGciOiJI...
-#> DEBUG [2020-12-06 15:54:02] ThingsboardApi$getToken: expiration 2020-12-06 15:59:02
+#> DEBUG [2021-01-20 12:38:44] ThingsboardApi$getToken: eyJhbGciOiJI...
+#> DEBUG [2021-01-20 12:38:44] ThingsboardApi$getToken: expiration 2021-01-20 12:43:44
 ```
 
 ### Retrieve data from the ‘ThingsBoard’ server
@@ -78,7 +79,7 @@ You can get the available keys on the specified device defined by its
 ``` r
 # Get list of keys
 keys = tb_api$getKeys(entityId = entityId)
-#> DEBUG [2020-12-06 15:54:02] keys = A0, A1, A10, A2, A3, A4, A5, A6, A7, A8, A9, B0, B1, C1, C3, N0, Q0, Q1, Q2, Q3, Y0, Y1, Y10, Y2, Y3, Y4, Y5, Y6, Y7, Y8, Y9
+#> DEBUG [2021-01-20 12:38:44] keys = A0, A1, A10, A2, A3, A4, A5, A6, A7, A8, A9, B0, B1, C1, C3, N0, Q0, Q1, Q2, Q3, Y0, Y1, Y10, Y2, Y3, Y4, Y5, Y6, Y7, Y8, Y9
 ```
 
 Knowing the name of the available keys, you can get the telemetry of
@@ -91,29 +92,29 @@ df <- tb_api$getTelemetry(entityId,
                        keys = keys[grep("^Y", keys)],
                        startTs = startDate,
                        endTs = endDate)
-#> DEBUG [2020-12-06 15:54:02] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605805200000&agg=NONE
-#> DEBUG [2020-12-06 15:54:02] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605804700000&agg=NONE
-#> DEBUG [2020-12-06 15:54:02] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605804199000&agg=NONE
-#> DEBUG [2020-12-06 15:54:03] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605803699000&agg=NONE
-#> DEBUG [2020-12-06 15:54:03] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605803198000&agg=NONE
-#> DEBUG [2020-12-06 15:54:03] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605802698000&agg=NONE
-#> DEBUG [2020-12-06 15:54:03] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605802197000&agg=NONE
-#> DEBUG [2020-12-06 15:54:04] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605801697000&agg=NONE
-#> DEBUG [2020-12-06 15:54:04] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605801196000&agg=NONE
-#> DEBUG [2020-12-06 15:54:04] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605800696000&agg=NONE
-#> DEBUG [2020-12-06 15:54:04] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605800195000&agg=NONE
-#> DEBUG [2020-12-06 15:54:04] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605799695000&agg=NONE
-#> DEBUG [2020-12-06 15:54:05] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605799194000&agg=NONE
-#> DEBUG [2020-12-06 15:54:05] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605798694000&agg=NONE
-#> DEBUG [2020-12-06 15:54:05] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605798193000&agg=NONE
-#> DEBUG [2020-12-06 15:54:05] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605797693000&agg=NONE
-#> DEBUG [2020-12-06 15:54:05] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605797192000&agg=NONE
-#> DEBUG [2020-12-06 15:54:06] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605796692000&agg=NONE
-#> DEBUG [2020-12-06 15:54:06] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605796191000&agg=NONE
-#> DEBUG [2020-12-06 15:54:06] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605795691000&agg=NONE
-#> DEBUG [2020-12-06 15:54:06] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605795190000&agg=NONE
-#> DEBUG [2020-12-06 15:54:06] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605794690000&agg=NONE
-#> DEBUG [2020-12-06 15:54:07] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605794400000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605805200000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605804700000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605804199000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605803699000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605803198000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605802698000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605802197000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605801697000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605801196000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605800696000&agg=NONE
+#> DEBUG [2021-01-20 12:38:44] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605800195000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605799695000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605799194000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605798694000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605798193000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605797693000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605797192000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605796692000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605796191000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605795691000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605795190000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605794690000&agg=NONE
+#> DEBUG [2021-01-20 12:38:45] getValues query keys=Y0,Y1,Y10,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9&startTs=1605794400000&endTs=1605794400000&agg=NONE
 ```
 
 Here below the first records of the extracted telemetry:
