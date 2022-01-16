@@ -200,7 +200,8 @@ ThingsboardApi$methods(
     lV <- lapply(names(lV),
                  function(x) {
                    df <- data.frame(key = x,
-                                    v = matrix(unlist(lV[[x]]), ncol = 2, byrow = TRUE))
+                                    v = matrix(unlist(lV[[x]]), ncol = 2, byrow = TRUE),
+                                    stringsAsFactors = FALSE)
                    colnames(df) <-
                      c("key", "ts", "value")
                    df
@@ -212,7 +213,8 @@ ThingsboardApi$methods(
     } else {
       dfV <- data.frame(key = character(),
                         ts = as.POSIXct(character()),
-                        value = numeric())
+                        value = numeric(),
+                        stringsAsFactors = FALSE)
     }
     return(dfV)
   }
