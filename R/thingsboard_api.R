@@ -242,19 +242,16 @@ ThingsboardApi$methods(
 NULL
 ThingsboardApi$methods(
   getTelemetry = function(..., endTs) {
-    the_end <- FALSE
-    df <- NULL
-    while(!the_end) {
-      dfI <- getValues(..., endTs = endTs)
-      the_end <- nrow(dfI) == 0
-      if(is.null(df)) {
-        df <- dfI
-      } else {
-        df <- rbind(df, dfI)
-      }
-      df_minTs <- df %>% arrange(ts) %>% group_by(key) %>% slice(1)
-      endTs <- max(df_minTs$ts)
+    l <- list()
+    i <- 0
+    while (TRUE) {
+      i <- i + 1
+      l[[i]] <- getValues(..., endTs = endTs)
+      if (nrow(l[[i]]) == 0) break
+      df_minTs <- l[[i]] %>% arrange(ts) %>% group_by(key) %>% slice(1)
+      endTs <- max(df_minTs$ts) - 1
     }
+    df <- do.call(rbind, l)
     df <- unique(df)
     return(df)
   }
