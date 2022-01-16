@@ -1,8 +1,8 @@
 Package: Rthingsboard
 Type: Package
 Title: 'ThingsBoard' API
-Version: 0.2.4.9000
-Date: 2022-01-15
+Version: 0.2.5
+Date: 2022-01-16
 Authors@R:
     person(given = "David",
            family = "Dorchies",
@@ -23,5 +23,5 @@ Suggests:
     testthat
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
-URL: https://DDorch.github.io/Rthingsboard, https://github.com/DDorch/Rthingsboard#readme
+URL: https://ddorch.github.io/Rthingsboard, https://github.com/DDorch/Rthingsboard#readme
 BugReports: https://github.com/DDorch/Rthingsboard/issues
