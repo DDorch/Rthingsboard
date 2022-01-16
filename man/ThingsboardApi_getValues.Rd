@@ -2,28 +2,7 @@
 % Please edit documentation in R/thingsboard_api.R
 \name{ThingsboardApi_getValues}
 \alias{ThingsboardApi_getValues}
-\title{Fetch values from an entity}
-\arguments{
-\item{entityId}{A \link{character} with the entity ID given (See \url{https://thingsboard.io/docs/user-guide/entity-views/})}
-
-\item{keys}{Vector of \link{character} with the list of keys from which getting the telemetry values}
-
-\item{entityType}{A \link{character} (default "DEVICE")}
-
-\item{startTs}{A \link{numeric} or a \link{POSIXct} representing respectively the epoch or the date of the start of data extraction period}
-
-\item{endTs}{A \link{numeric} or a \link{POSIXct} representing respectively the epoch or the date of the end of data extraction period}
-}
-\value{
-A \link{data.frame} with one row per data and 3 columns:
-\code{key}: A \link{character} with the key,
-\code{ts}: A \link{POSIXct} with the timestamp of the data,
-\code{value}: A \link{numeric} with the value of the data
-}
+\title{Fetch telemetry}
 \description{
-See: \url{https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values}
-
-This method has a strong limitation as the 'ThingsBoard' API only send the
-100 last values of each key.
-Use the method getTelemetry to override this limitation.
+See \link{ThingsboardApi_getTelemetry}.
 }

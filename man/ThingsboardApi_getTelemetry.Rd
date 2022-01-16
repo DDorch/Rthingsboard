@@ -4,7 +4,13 @@
 \alias{ThingsboardApi_getTelemetry}
 \title{Fetch telemetry}
 \arguments{
-\item{...}{Parameters passed through method \link{ThingsboardApi_getValues}}
+\item{entityId}{A \link{character} with the entity ID given (See \url{https://thingsboard.io/docs/user-guide/entity-views/})}
+
+\item{keys}{Vector of \link{character} with the list of keys from which getting the telemetry values}
+
+\item{entityType}{A \link{character} (default "DEVICE")}
+
+\item{startTs}{A \link{numeric} or a \link{POSIXct} representing respectively the epoch or the date of the start of data extraction period}
 
 \item{endTs}{A \link{numeric} or a \link{POSIXct} representing respectively the epoch or the date of the end of data extraction period}
 }
@@ -17,7 +23,11 @@ A \link{data.frame} with one row per data and 3 columns:
 }
 }
 \description{
-Fetch telemetry data for an entity. See \link{ThingsboardApi_getValues} for the arguments.
+Fetch telemetry data of an entity.
 
-See: \url{https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values}
+It uses the following API: \url{https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values}
+
+The method \code{getValues} has a strong limitation as the 'ThingsBoard' API only send the
+100 last values of each key. The method \code{getTelemetry} overcomes this limitation by
+automatically by calling \code{getValues} in a loop.
 }

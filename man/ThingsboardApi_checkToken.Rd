@@ -7,5 +7,6 @@
 \link{NULL}
 }
 \description{
-Check if the token is timeouted and refresh it if necessary
+This method is automatically call by each other methods of the class \link{ThingsboardApi}.
+So, except for debugging purpose, it's not useful to call directly.
 }

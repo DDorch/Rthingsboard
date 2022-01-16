@@ -10,5 +10,6 @@
 A \link{list} with keys 'token' and 'refreshtoken'
 }
 \description{
-Get authorisation token from thingsboard server for a specific device
+This method is automatically called by \link{ThingsboardApi_checkToken}, and so by any other methods
+of the class \link{ThingsboardApi} as needed. Except for debugging purpose, it's not useful to call directly.
 }

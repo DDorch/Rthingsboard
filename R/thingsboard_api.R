@@ -10,6 +10,12 @@
 #' @exportClass ThingsboardApi
 #' @importFrom methods new
 #'
+#' @seealso The `ThingsboardApi` class methods :
+#' - [ThingsboardApi_checkToken] for checking and refreshing the token
+#' - [ThingsboardApi_getToken] for getting authorisation token from Thingsboard server for a specific device
+#' - [ThingsboardApi_getKeys] for fetching data keys of an entity
+#' - [ThingsboardApi_getValues] and [ThingsboardApi_getTelemetry] for fetching telemetry of an entity
+#'
 #' @examples
 #' \donttest{
 #' thinksboard_api = tryCatch(
@@ -45,6 +51,10 @@ ThingsboardApi <- setRefClass(
 
 #' Check if the token is timeouted and refresh it if necessary
 #'
+#' @description
+#' This method is automatically call by each other methods of the class [ThingsboardApi].
+#' So, except for debugging purpose, it's not useful to call directly.
+#'
 #' @name ThingsboardApi_checkToken
 #' @return [NULL]
 #'
@@ -59,6 +69,10 @@ ThingsboardApi$methods(
 
 
 #' Get authorisation token from thingsboard server for a specific device
+#'
+#' @description
+#' This method is automatically called by [ThingsboardApi_checkToken], and so by any other methods
+#' of the class [ThingsboardApi] as needed. Except for debugging purpose, it's not useful to call directly.
 #'
 #' @name ThingsboardApi_getToken
 #' @param timeOut [numeric] number of second before token timeout (default field `tokenTimeOut`)
@@ -93,6 +107,7 @@ ThingsboardApi$methods(
 #' Fetch data keys for an entity
 #'
 #' @name ThingsboardApi_getKeys
+#'
 #' @details
 #' The description of this operation in API documentation is here: <https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-keys>
 #'
@@ -130,27 +145,12 @@ ThingsboardApi$methods(
 )
 
 
-#' Fetch values from an entity
+#' Fetch telemetry
 #'
 #' @description
-#' See: <https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values>
-#'
-#' This method has a strong limitation as the 'ThingsBoard' API only send the
-#' 100 last values of each key.
-#' Use the method getTelemetry to override this limitation.
+#' See [ThingsboardApi_getTelemetry].
 #'
 #' @name ThingsboardApi_getValues
-#' @param entityId A [character] with the entity ID given (See <https://thingsboard.io/docs/user-guide/entity-views/>)
-#' @param keys Vector of [character] with the list of keys from which getting the telemetry values
-#' @param entityType A [character] (default "DEVICE")
-#' @param startTs A [numeric] or a [POSIXct] representing respectively the epoch or the date of the start of data extraction period
-#' @param endTs A [numeric] or a [POSIXct] representing respectively the epoch or the date of the end of data extraction period
-#'
-#' @return A [data.frame] with one row per data and 3 columns:
-#'   `key`: A [character] with the key,
-#'   `ts`: A [POSIXct] with the timestamp of the data,
-#'   `value`: A [numeric] with the value of the data
-#'
 #'
 NULL
 ThingsboardApi$methods(
@@ -224,13 +224,22 @@ ThingsboardApi$methods(
 #' Fetch telemetry
 #'
 #' @description
+#' Fetch telemetry data of an entity.
 #'
-#' Fetch telemetry data for an entity. See [ThingsboardApi_getValues] for the arguments.
+#' It uses the following API: <https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values>
 #'
-#' See: <https://thingsboard.io/docs/user-guide/telemetry/#get-telemetry-values>
+#' The method `getValues` has a strong limitation as the 'ThingsBoard' API only send the
+#' 100 last values of each key. The method `getTelemetry` overcomes this limitation by
+#' automatically by calling `getValues` in a loop.
+#'
 #'
 #' @name ThingsboardApi_getTelemetry
-#' @param ... Parameters passed through method [ThingsboardApi_getValues]
+#' @rdname ThingsboardApi_getTelemetry
+#'
+#' @param entityId A [character] with the entity ID given (See <https://thingsboard.io/docs/user-guide/entity-views/>)
+#' @param keys Vector of [character] with the list of keys from which getting the telemetry values
+#' @param entityType A [character] (default "DEVICE")
+#' @param startTs A [numeric] or a [POSIXct] representing respectively the epoch or the date of the start of data extraction period
 #' @param endTs A [numeric] or a [POSIXct] representing respectively the epoch or the date of the end of data extraction period
 #'
 #' @return A [data.frame] with one row per data and 3 columns:

@@ -37,3 +37,12 @@ thinksboard_api = tryCatch(
 )
 }
 }
+\seealso{
+The \code{ThingsboardApi} class methods :
+\itemize{
+\item \link{ThingsboardApi_checkToken} for checking and refreshing the token
+\item \link{ThingsboardApi_getToken} for getting authorisation token from Thingsboard server for a specific device
+\item \link{ThingsboardApi_getKeys} for fetching data keys of an entity
+\item \link{ThingsboardApi_getValues} and \link{ThingsboardApi_getTelemetry} for fetching telemetry of an entity
+}
+}
