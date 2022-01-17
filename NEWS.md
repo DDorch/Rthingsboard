@@ -1,4 +1,4 @@
-# Rthingsboard 0.2.4.9000
+# Rthingsboard 0.2.5 (2021-01-17)
 
 New features:
 
