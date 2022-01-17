@@ -8,7 +8,7 @@
 [![License:
 AGPL-3](https://img.shields.io/badge/license-AGPL--3-orange.svg)](https://cran.r-project.org/web/licenses/AGPL-3)
 [![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![](https://img.shields.io/badge/devel%20version-0.2.5-blue.svg)](https://github.com/https://ddorch.github.io/Rthingsboard/)
+[![](https://img.shields.io/badge/devel%20version-0.2.6-blue.svg)](https://github.com/https://ddorch.github.io/Rthingsboard/)
 [![R build
 status](https://github.com/DDorch/Rthingsboard/workflows/R-CMD-check/badge.svg)](https://github.com/DDorch/Rthingsboard/actions)
 [![](https://img.shields.io/github/languages/code-size/DDorch/Rthingsboard.svg)](https://github.com/DDorch/Rthingsboard)

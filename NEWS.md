@@ -1,11 +1,11 @@
-# Rthingsboard 0.2.5 (2021-01-17)
+# Rthingsboard 0.2.6 (2021-01-17)
 
 New features:
 
 * Added a `NEWS.md` file to track changes to the package.
 * Documentation improvement
 
-Bug fixes: 
+Bug fixes:
 
 * Infinite loop on getTelemetry with several keys (#5)
 * TS output '1970-01-01 01:00:00' and no value (#7)
@@ -29,7 +29,7 @@ Version submitted to CRAN
 
 # Rthingsboard 0.2.1 (2020-12-06)
 
-Internal changes: 
+Internal changes:
 
 * Put package names, software names and API (application programming interface) names in single quotes
 * Remove <<- assignments
@@ -43,7 +43,7 @@ New features:
 * Add error handler in thingsboardApi
 * Improve documentation
 
-Bug fixes: 
+Bug fixes:
 
 * Time zone issues (4db37394ad5f55382b243070a8dd003b4b3bc2da)
 
